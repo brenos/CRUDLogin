@@ -45,14 +45,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="ADO\Factory\BaseFactory.cs" />
+    <Compile Include="ADO\Factory\BaseSqlServer.cs" />
+    <Compile Include="ADO\Factory\IBase.cs" />
+    <Compile Include="ADO\TO\DatabaseTO.cs" />
+    <Compile Include="Bussiness\Base\BaseBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\ViewLoginBO.cs" />
+    <Compile Include="FrmConexao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrmConexao.Designer.cs">
+      <DependentUpon>FrmConexao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProjeto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProjeto.Designer.cs">
+      <DependentUpon>FrmProjeto.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmConexao.resx">
+      <DependentUpon>FrmConexao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProjeto.resx">
+      <DependentUpon>FrmProjeto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,6 +92,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bussiness\Gerador\Controllers\" />
+    <Folder Include="Bussiness\Gerador\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
