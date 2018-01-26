@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+  <html>
+      <head>
+          <meta charset = "utf-8" >
+          <meta http-equiv="X -UA-Compatible" content="IE=edge">
+          <title>
+            {0}
+          </title>
+      </head>
+      <body>
+          <h2>{1}</h2>
+          <h3>Login</h3>
+ 
+          @using(Html.BeginForm("Login", "Account", FormMethod.Post))
+          {
+              <div style="color:red;">
+                  <b>
+                      @Html.AntiForgeryToken()
+                      @Html.ValidationSummary(true)
+                  </b>
+                  @Html.TextBox("UserName", null, null })
+                  @Html.Password("Password", null, null)
+                  @Html.CheckBox("RememberMe", false, null) Manter logado
+                  @Html.Hidden("returnUrl", "Menus/Index")
+                  @Html.Hidden("Email", "1")
+                  @Html.Hidden("Name", "1")
+                  <button type="submit">Entrar</button>
+              </div>
+          }
+          @* @Html.ActionLink("Recuperar senha", "Forgot", null, null)*@
+      </body>
+  </html>
+
+
+

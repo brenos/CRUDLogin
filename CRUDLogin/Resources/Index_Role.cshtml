@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CRUDLogin.Models.RoleModel>
+
+@{
+    ViewBag.Title = "Regras";
+}
+
+<h2>Regras</h2>
+
+<p>
+    @Html.ActionLink("Nova Regra", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Regra)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Regra)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "Details", "Role", new { username = item.Regra }) |
+                @Html.ActionLink("Excluir", "Delete", "Role", new { username = item.Regra })
+            </td>
+        </tr>
+
+    }
+
+</table>

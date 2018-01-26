@@ -23,9 +23,9 @@ namespace CRUDLogin
             cmbBanco.SelectedIndex = 0;
 
             cmbBase.SelectedIndex = 0;
-            txtConexao.Text = "SQLExpress";
+            txtConexao.Text = @"DESKTOP-626SLSH\SQLEXPRESS";
             txtUsuario.Text = "sa";
-            txtSenha.Text = "1234";
+            txtSenha.Text = "12345678";
         }
 
         private void chbBaseManual_CheckedChanged(object sender, EventArgs e)
@@ -41,8 +41,10 @@ namespace CRUDLogin
         {
             cmbBase.Items.Clear();
 
+            _Conexao = getConnectionString();
+
             BaseBO baseBO = new BaseBO();
-            if (baseBO.isConectado(_Conexao))
+            if (baseBO.IsConectado(_Conexao))
             {
                 preencheComboBase();
                 MessageBox.Show("Banco de dados conectado!", "Teste de Conexão", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -57,7 +59,14 @@ namespace CRUDLogin
         {
             if (!camposVazios())
             {
-                FrmProjeto frmProjeto = new FrmProjeto(this);
+                ParametroTO parametroTO = new ParametroTO
+                {
+                    Base = cmbBase.SelectedText,
+                    Conexao = txtConexao.Text,
+                    Senha = txtSenha.Text,
+                    Usuario = txtUsuario.Text
+                };
+                FrmProjeto frmProjeto = new FrmProjeto(this, parametroTO);
                 frmProjeto.Show();
                 this.Visible = false;
             }
@@ -66,8 +75,9 @@ namespace CRUDLogin
 
         private void txtSenha_Leave(object sender, EventArgs e)
         {
+            _Conexao = getConnectionString();
             BaseBO baseBO = new BaseBO();
-            if (baseBO.isConectado(_Conexao))
+            if (baseBO.IsConectado(_Conexao))
             {
                 preencheComboBase();
             }
@@ -121,11 +131,20 @@ namespace CRUDLogin
             cmbBase.Items.Clear();
 
             BaseBO baseBO = new BaseBO();
-            List<DatabaseTO> databases = baseBO.getDatabases(_Conexao);
+            List<DatabaseTO> databases = baseBO.GetDatabases(_Conexao);
             foreach (var database in databases)
             {
                 cmbBase.Items.Add(database.Nome);
             }
+            cmbBase.SelectedIndex = 0;
+        }
+
+        private string getConnectionString()
+        {
+            string connectionString = "Data Source=" + txtConexao.Text.Trim() + ";";
+            connectionString += "User ID=" + txtUsuario.Text.Trim() + ";";
+            connectionString += "Password=" + txtSenha.Text.Trim() + ";";
+            return connectionString;
         }
         
     }

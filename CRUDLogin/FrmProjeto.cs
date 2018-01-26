@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CRUDLogin.ADO.TO;
+using CRUDLogin.Bussiness.Gerador;
+using CRUDLogin.Bussiness.Gerador.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +17,12 @@ namespace CRUDLogin
     {
         private FrmConexao _FrmConexao { get; set; }
         private bool _FormClosed { get; set; }
+        private ParametroTO _ParametroTO { get; set; }
 
-        public FrmProjeto(FrmConexao frmConexao)
+        public FrmProjeto(FrmConexao frmConexao, ParametroTO parametroTO)
         {
             InitializeComponent();
+            _ParametroTO = parametroTO;
             _FrmConexao = frmConexao;
             _FormClosed = true;
         }
@@ -39,7 +44,22 @@ namespace CRUDLogin
         {
             if (!camposVazios())
             {
+                _ParametroTO.Pacote = txtPacote.Text;
+                _ParametroTO.Pasta = txtCaminho.Text;
+                _ParametroTO.NmProjeto = txtNomeProjeto.Text;
+                _ParametroTO.SenhaAdmin = txtSenhaAdm.Text;
 
+                GeradorArquivoBO geradorArquivo = new GeradorArquivoBO();
+                if (geradorArquivo.GerarCRUDLogin(_ParametroTO))
+                {
+                    MessageBox.Show("Crud gerado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (DialogResult.No.Equals(MessageBox.Show("Deseja executar novamente o CRULogin?", "Executar novmente?", MessageBoxButtons.YesNo, MessageBoxIcon.Question)))
+                    {
+                        Application.Exit();
+                    }
+                    
+                }
+                
             }
         }
 

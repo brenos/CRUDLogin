@@ -49,8 +49,25 @@
     <Compile Include="ADO\Factory\BaseSqlServer.cs" />
     <Compile Include="ADO\Factory\IBase.cs" />
     <Compile Include="ADO\TO\DatabaseTO.cs" />
+    <Compile Include="ADO\TO\ParametroTO.cs" />
     <Compile Include="Bussiness\Base\BaseBO.cs" />
-    <Compile Include="Bussiness\Gerador\Views\ViewLoginBO.cs" />
+    <Compile Include="Bussiness\Gerador\Controllers\AccountControllerBO.cs" />
+    <Compile Include="Bussiness\Gerador\Controllers\RoleControllerBO.cs" />
+    <Compile Include="Bussiness\Gerador\GeradorArquivoBO.cs" />
+    <Compile Include="Bussiness\Gerador\Models\LoginModelBO.cs" />
+    <Compile Include="Bussiness\Gerador\Models\RoleModelBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewCreateAccountBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewDeleteAccountBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewDetailsAccountBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewEditAccountBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewForgotBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewIndexAccountBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewLoginBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Account\ViewResetPasswordBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Role\ViewCreateRoleBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Role\ViewDeleteRoleBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Role\ViewDetailsRoleBO.cs" />
+    <Compile Include="Bussiness\Gerador\Views\Role\ViewIndexRoleBO.cs" />
     <Compile Include="FrmConexao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,31 +88,72 @@
     <EmbeddedResource Include="FrmProjeto.resx">
       <DependentUpon>FrmProjeto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Properties\ResourcesModelMembership.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>ResourcesModelMembership.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\ResourcesViews.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourcesViews.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Properties\ResourcesModelMembership.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourcesModelMembership.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\ResourcesViews.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourcesViews.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Properties\ResourcesControllerMembership.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourcesControllerMembership.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\ResourceViewsRole.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceViewsRole.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\ResourcesControllerMembership.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourcesControllerMembership.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\ResourceViewsRole.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceViewsRole.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\AccountController.csx" />
+    <None Include="Resources\Create_Account.cshtml" />
+    <None Include="Resources\Create_Role.cshtml" />
+    <None Include="Resources\Delete_Account.cshtml" />
+    <None Include="Resources\Delete_Role.cshtml" />
+    <None Include="Resources\Details_Account.cshtml" />
+    <None Include="Resources\Details_Role.cshtml" />
+    <None Include="Resources\Edit_Account.cshtml" />
+    <None Include="Resources\Forgot_Account.cshtml" />
+    <None Include="Resources\Index_Account.cshtml" />
+    <None Include="Resources\Index_Role.cshtml" />
+    <None Include="Resources\LoginModel.csx" />
+    <None Include="Resources\Login_Account.cshtml" />
+    <None Include="Resources\ResetPassword_Account.cshtml" />
+    <None Include="Resources\RoleController.csx" />
+    <None Include="Resources\RoleModel.csx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bussiness\Gerador\Controllers\" />
-    <Folder Include="Bussiness\Gerador\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

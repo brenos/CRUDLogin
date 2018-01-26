@@ -14,18 +14,18 @@ namespace CRUDLogin.Bussiness.Base
         {
         }
 
-        public bool isConectado(string conexao)
+        public bool IsConectado(string conexao)
         {
             BaseFactory bf = new BaseFactory();
             IBase bs = bf.Factory(BaseFactory.BASESQLSERVER, conexao);
-            return bs.isConectado();
+            return bs.IsConectado();
         }
 
-        public List<DatabaseTO> getDatabases(string conexao)
+        public List<DatabaseTO> GetDatabases(string conexao)
         {
             BaseFactory bf = new BaseFactory();
             IBase bs = bf.Factory(BaseFactory.BASESQLSERVER, conexao);
-            return bs.getDatabases();
+            return bs.GetDatabases();
         }
     }
 }

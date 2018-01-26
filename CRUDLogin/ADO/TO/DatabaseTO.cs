@@ -9,10 +9,5 @@ namespace CRUDLogin.ADO.TO
     class DatabaseTO
     {
         public string Nome { get; set; }
-
-        public DatabaseTO()
-        {
-
-        }
     }
 }

@@ -25,7 +25,7 @@ namespace CRUDLogin.ADO.Factory
             _Conn = conexao;
         }
 
-        public List<DatabaseTO> getDatabases()
+        public List<DatabaseTO> GetDatabases()
         {
             List<DatabaseTO> databases = new List<DatabaseTO>();
             using (SqlConnection con = _Conexao)
@@ -49,7 +49,7 @@ namespace CRUDLogin.ADO.Factory
             return databases;
         }
 
-        public bool isConectado()
+        public bool IsConectado()
         {
             bool isConectado = true;
             try

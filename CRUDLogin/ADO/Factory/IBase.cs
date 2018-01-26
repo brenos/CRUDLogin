@@ -9,7 +9,7 @@ namespace CRUDLogin.ADO.Factory
 {
     interface IBase
     {
-        bool isConectado();
-        List<DatabaseTO> getDatabases();
+        bool IsConectado();
+        List<DatabaseTO> GetDatabases();
     }
 }

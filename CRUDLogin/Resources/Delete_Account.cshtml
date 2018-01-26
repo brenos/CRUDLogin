@@ -1,0 +1,44 @@
+﻿@model CRUDLogin.Models.LoginModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Delete</h2>
+
+<h3>Tem certeza que deseja apagar o usuário?</h3>
+<div>
+    <h4>Usuário</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.LabelFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+        <dt>@Html.LabelFor(model => model.UserName)</dt>
+        <dd>@Html.DisplayFor(model => model.UserName)</dd>
+        <dt>@Html.LabelFor(model => model.Email)</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+            @Html.Hidden("Password", "1")
+            @Html.Hidden("RememberMe", false)
+        </dd>
+        <dt>@Html.Label("Perfil")</dt>
+        <dd>
+            @foreach (var role in Roles.GetAllRoles())
+            {
+                if (Roles.FindUsersInRole(role, Model.UserName).Length > 0)
+                {
+                    @Html.DisplayName(role);
+                }
+            }
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>
