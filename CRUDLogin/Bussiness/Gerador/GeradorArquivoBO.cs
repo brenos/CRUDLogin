@@ -1,4 +1,5 @@
 ﻿using CRUDLogin.ADO.TO;
+using CRUDLogin.Bussiness.Gerador.Config;
 using CRUDLogin.Bussiness.Gerador.Controllers;
 using CRUDLogin.Bussiness.Gerador.Models;
 using CRUDLogin.Bussiness.Gerador.Views.Account;
@@ -19,9 +20,10 @@ namespace CRUDLogin.Bussiness.Gerador
         {
         }
 
-        public bool GerarCRUDLogin(ParametroTO parametroTO)
+        public RetornoTO GerarCRUDLogin(ParametroTO parametroTO)
         {
-            bool gerouArquivos = false;
+            RetornoTO retorno = new RetornoTO();
+            
             if (Directory.GetDirectories(parametroTO.Pasta).Where(s => s == parametroTO.Pasta + "\\Views").Count() > 0)
             {
                 //Escrever no Web.Config
@@ -38,10 +40,19 @@ namespace CRUDLogin.Bussiness.Gerador
                 Directory.CreateDirectory(parametroTO.Pasta + "\\Models");
                 //Gerar os Models
                 GerarModels(parametroTO);
-                gerouArquivos = true;
+                //Alterar o web.config
+                AlterarWebConfig(parametroTO);
+
+                retorno.IsOK = true;
+                retorno.Mensagem = "CRUD gerado com sucesso!";
+            }
+            else
+            {
+                retorno.IsOK = false;
+                retorno.Mensagem = "Favor selecionar a pasta correta do projeto.";
             }
 
-            return gerouArquivos;
+            return retorno;
         }
 
         private void GerarViews(ParametroTO parametroTO, bool isBotstrap)
@@ -104,6 +115,12 @@ namespace CRUDLogin.Bussiness.Gerador
 
             RoleModelBO roleModel = new RoleModelBO(parametroTO);
             roleModel.GerarArquivo();
+        }
+
+        private void AlterarWebConfig(ParametroTO parametroTO)
+        {
+            WebConfigBO webConfig = new WebConfigBO(parametroTO);
+            webConfig.AddTagsNoWebConfig();
         }
     }
 }

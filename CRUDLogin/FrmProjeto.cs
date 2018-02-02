@@ -50,14 +50,19 @@ namespace CRUDLogin
                 _ParametroTO.SenhaAdmin = txtSenhaAdm.Text;
 
                 GeradorArquivoBO geradorArquivo = new GeradorArquivoBO();
-                if (geradorArquivo.GerarCRUDLogin(_ParametroTO))
+                RetornoTO retorno = geradorArquivo.GerarCRUDLogin(_ParametroTO);
+                if (retorno.IsOK)
                 {
-                    MessageBox.Show("Crud gerado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(retorno.Mensagem, "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (DialogResult.No.Equals(MessageBox.Show("Deseja executar novamente o CRULogin?", "Executar novmente?", MessageBoxButtons.YesNo, MessageBoxIcon.Question)))
                     {
                         Application.Exit();
                     }
                     
+                }
+                else
+                {
+                    MessageBox.Show(retorno.Mensagem, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
             }
@@ -100,6 +105,11 @@ namespace CRUDLogin
                 MessageBox.Show(erros.ToString(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return isVazio;
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

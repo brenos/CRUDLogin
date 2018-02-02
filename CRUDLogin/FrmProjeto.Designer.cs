@@ -51,6 +51,7 @@
             this.txtNomeProjeto = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPacote = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -272,11 +273,22 @@
             this.txtPacote.Size = new System.Drawing.Size(375, 20);
             this.txtPacote.TabIndex = 1;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(122, 298);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(227, 12);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "(Onde contem as pastas Views, Controllers e Models)";
+            // 
             // FrmProjeto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 631);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.txtPacote);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtNomeProjeto);
@@ -333,5 +345,6 @@
         private System.Windows.Forms.TextBox txtNomeProjeto;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtPacote;
+        private System.Windows.Forms.Label label9;
     }
 }
