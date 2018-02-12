@@ -72,7 +72,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(464, 75);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 88;
             this.label1.Text = "CRUD Login";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -102,7 +102,7 @@
             this.btnAvancar.Location = new System.Drawing.Point(0, 0);
             this.btnAvancar.Name = "btnAvancar";
             this.btnAvancar.Size = new System.Drawing.Size(200, 40);
-            this.btnAvancar.TabIndex = 7;
+            this.btnAvancar.TabIndex = 8;
             this.btnAvancar.Text = "Avançar";
             this.btnAvancar.UseVisualStyleBackColor = true;
             this.btnAvancar.Click += new System.EventHandler(this.btnAvancar_Click);
@@ -123,7 +123,7 @@
             this.btnTestarCon.Location = new System.Drawing.Point(0, 0);
             this.btnTestarCon.Name = "btnTestarCon";
             this.btnTestarCon.Size = new System.Drawing.Size(200, 40);
-            this.btnTestarCon.TabIndex = 6;
+            this.btnTestarCon.TabIndex = 7;
             this.btnTestarCon.Text = "Testar Conexão";
             this.btnTestarCon.UseVisualStyleBackColor = true;
             this.btnTestarCon.Click += new System.EventHandler(this.btnTestarCon_Click);
@@ -145,7 +145,7 @@
             this.label3.Location = new System.Drawing.Point(0, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(464, 41);
-            this.label3.TabIndex = 1;
+            this.label3.TabIndex = 90;
             this.label3.Text = "Configuração necessária para salvar no web.config a ConnectionString com a base d" +
     "e dados no qual a estrutura de login criará tabelas e fará o acesso.";
             // 
@@ -156,7 +156,7 @@
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(464, 21);
-            this.label2.TabIndex = 0;
+            this.label2.TabIndex = 89;
             this.label2.Text = "Conexão com o Banco de Dados";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -167,7 +167,7 @@
             this.label4.Location = new System.Drawing.Point(29, 239);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 15);
-            this.label4.TabIndex = 3;
+            this.label4.TabIndex = 92;
             this.label4.Text = "Conexão";
             // 
             // txtConexao
@@ -175,7 +175,7 @@
             this.txtConexao.Location = new System.Drawing.Point(32, 257);
             this.txtConexao.Name = "txtConexao";
             this.txtConexao.Size = new System.Drawing.Size(375, 20);
-            this.txtConexao.TabIndex = 1;
+            this.txtConexao.TabIndex = 2;
             // 
             // label5
             // 
@@ -184,7 +184,7 @@
             this.label5.Location = new System.Drawing.Point(29, 182);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 15);
-            this.label5.TabIndex = 5;
+            this.label5.TabIndex = 91;
             this.label5.Text = "Banco de Dados";
             // 
             // cmbBanco
@@ -196,7 +196,7 @@
             this.cmbBanco.Location = new System.Drawing.Point(32, 201);
             this.cmbBanco.Name = "cmbBanco";
             this.cmbBanco.Size = new System.Drawing.Size(375, 21);
-            this.cmbBanco.TabIndex = 0;
+            this.cmbBanco.TabIndex = 1;
             // 
             // label6
             // 
@@ -205,7 +205,7 @@
             this.label6.Location = new System.Drawing.Point(29, 295);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 15);
-            this.label6.TabIndex = 7;
+            this.label6.TabIndex = 93;
             this.label6.Text = "Usuário";
             // 
             // txtUsuario
@@ -213,7 +213,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(32, 313);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(375, 20);
-            this.txtUsuario.TabIndex = 2;
+            this.txtUsuario.TabIndex = 3;
             // 
             // label7
             // 
@@ -222,7 +222,7 @@
             this.label7.Location = new System.Drawing.Point(29, 352);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 15);
-            this.label7.TabIndex = 9;
+            this.label7.TabIndex = 95;
             this.label7.Text = "Senha";
             // 
             // label8
@@ -232,7 +232,7 @@
             this.label8.Location = new System.Drawing.Point(29, 411);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(91, 15);
-            this.label8.TabIndex = 10;
+            this.label8.TabIndex = 96;
             this.label8.Text = "Base de Dados";
             // 
             // txtSenha
@@ -241,7 +241,7 @@
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(375, 20);
-            this.txtSenha.TabIndex = 3;
+            this.txtSenha.TabIndex = 4;
             this.txtSenha.UseSystemPasswordChar = true;
             this.txtSenha.Leave += new System.EventHandler(this.txtSenha_Leave);
             // 
@@ -249,12 +249,10 @@
             // 
             this.cmbBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBase.FormattingEnabled = true;
-            this.cmbBase.Items.AddRange(new object[] {
-            "TESTE"});
             this.cmbBase.Location = new System.Drawing.Point(32, 429);
             this.cmbBase.Name = "cmbBase";
             this.cmbBase.Size = new System.Drawing.Size(375, 21);
-            this.cmbBase.TabIndex = 4;
+            this.cmbBase.TabIndex = 5;
             // 
             // chbBaseManual
             // 
@@ -262,7 +260,7 @@
             this.chbBaseManual.Location = new System.Drawing.Point(32, 456);
             this.chbBaseManual.Name = "chbBaseManual";
             this.chbBaseManual.Size = new System.Drawing.Size(182, 17);
-            this.chbBaseManual.TabIndex = 5;
+            this.chbBaseManual.TabIndex = 6;
             this.chbBaseManual.Text = "Digitar o nome da base de dados";
             this.chbBaseManual.UseVisualStyleBackColor = true;
             this.chbBaseManual.CheckedChanged += new System.EventHandler(this.chbBaseManual_CheckedChanged);

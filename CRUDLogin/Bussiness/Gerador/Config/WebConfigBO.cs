@@ -13,102 +13,92 @@ namespace CRUDLogin.Bussiness.Gerador.Config
     class WebConfigBO
     {
         private ParametroTO _ParametroTO { get; set; }
-        private StringBuilder _SystemWebProfileElements { get; set; }
-        private StringBuilder _SystemWebMembershipElements { get; set; }
-        private StringBuilder _SystemWebRoleElements { get; set; }
-        private StringBuilder _SystemWebAutenticationElements { get; set; }
-        private StringBuilder _SystemWebAuthorizationElements { get; set; }
-        private StringBuilder _SystemWebSessionStateElements { get; set; }
-        private StringBuilder _LocationsForgotElements { get; set; }
-        private StringBuilder _LocationsHomeElements { get; set; }
-        private StringBuilder _ConnectionStringElement { get; set; }
 
         public WebConfigBO(ParametroTO parametroTO)
         {
             _ParametroTO = parametroTO;
-            Set_SystemWebProfileElements();
-            Set_SystemWebMembershipElements();
-            Set_SystemWebRoleElements();
-            Set_SystemWebAutenticationElements();
-            Set_SystemWebAuthorizationElements();
-            Set_SystemWebSessionStateElements();
-            Set_LocationsForgotElements();
-            Set_LocationHomeElements();
-            Set_ConnectionString();
         }
-
+        
         public void AddTagsNoWebConfig()
         {
-            //Configuration config = WebConfigurationManager.OpenWebConfiguration(_ParametroTO.Pasta);
-            //config.SectionGroups.Get("system.web");
+            //Verificar se ja adicionou o nuget (Verifica se tem a tag Membership)
+            //Caso tenha adicionado, é só alterar os application name e colocar outro atributos nas tags
             XElement webConfig = XElement.Load(_ParametroTO.Pasta + "\\Web.config");
+
+            XElement systemWeb = webConfig.Element(XName.Get("system.web"));
+            XElement profile = systemWeb.Element(XName.Get("profile"));
+            XElement membership = systemWeb.Element(XName.Get("membership"));
+            XElement role = systemWeb.Element(XName.Get("profile"));
+
+            XElement connectionString = webConfig.Element(XName.Get("connectionStrings"));
+
+            Set_SystemWebProfileElements(profile);
+            Set_SystemWebMembershipElements(membership);
+            Set_SystemWebRoleElements(role);
+            systemWeb.Add(XElement.Parse(Get_SystemWebAutenticationElements()));
+            systemWeb.Add(XElement.Parse(Get_SystemWebAuthorizationElements()));
+            //Verifica o SessionState
+            systemWeb.AddAfterSelf(XElement.Parse(Get_LocationsForgotElements()));
+            systemWeb.AddAfterSelf(XElement.Parse(Get_LocationInstalarSistemaElements()));
+            Set_ConnectionString(connectionString);
             
-            foreach (var node in webConfig.Elements())
-            {
-                if (node.Name.LocalName.Equals("system.web"))
-                {
-                    node.Add(XElement.Parse(_SystemWebProfileElements.ToString()));
-                    node.Add(XElement.Parse(_SystemWebMembershipElements.ToString()));
-                    node.Add(XElement.Parse(_SystemWebRoleElements.ToString()));
-                    node.Add(XElement.Parse(_SystemWebAutenticationElements.ToString()));
-                    node.Add(XElement.Parse(_SystemWebAuthorizationElements.ToString()));
-                    node.Add(XElement.Parse(_SystemWebSessionStateElements.ToString()));
-                    node.AddAfterSelf(XElement.Parse(_LocationsForgotElements.ToString()));
-                    node.AddAfterSelf(XElement.Parse(_LocationsHomeElements.ToString()));
-                }
-
-                if (node.Name.LocalName.Equals("connectionStrings"))
-                {
-                    node.Add(XElement.Parse(_ConnectionStringElement.ToString()));
-                }
-            }
-
             webConfig.Save(_ParametroTO.Pasta + "\\Web.config");
         }
 
-        private void Set_SystemWebProfileElements()
+        private XElement Get_AddFromProvidersElement(XElement node)
         {
-            StringBuilder sb = new StringBuilder();
+            XElement providers = node.Element(XName.Get("providers"));
+            XElement add = providers.Element(XName.Get("add"));
+            return add;
+        }
+
+        private void Set_SystemWebProfileElements(XElement profile)
+        {
+            Get_AddFromProvidersElement(profile).SetAttributeValue(XName.Get("applicationName"), _ParametroTO.NmProjeto);
+            /**StringBuilder sb = new StringBuilder();
             sb.AppendLine("<profile defaultProvider=\"DefaultProfileProvider\">");
             sb.AppendLine("<providers>");
-            sb.AppendLine("<add name=\"DefaultProfileProvider\" type=\"System.Web.Providers.DefaultProfileProvider, System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"MembershipConnection\" applicationName=\"" + _ParametroTO.NmProjeto + "\" />");
+            sb.AppendLine("<add name=\"DefaultProfileProvider\" type=\"System.Web.Providers.DefaultProfileProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"DefaultConnection\" applicationName=\"" + _ParametroTO.NmProjeto + "\" />");
             sb.AppendLine("</providers>");
             sb.AppendLine("</profile>");
-            _SystemWebProfileElements = sb;
+            _SystemWebProfileElements = sb;**/
         }
 
-        private void Set_SystemWebMembershipElements()
+        private void Set_SystemWebMembershipElements(XElement membership)
         {
-            StringBuilder sb = new StringBuilder();
+            XElement add = Get_AddFromProvidersElement(membership);
+            add.SetAttributeValue(XName.Get("applicationName"), _ParametroTO.NmProjeto);
+            /**StringBuilder sb = new StringBuilder();
             sb.AppendLine("<membership defaultProvider=\"DefaultMembershipProvider\">");
             sb.AppendLine("<providers>");
-            sb.AppendLine("<add name=\"DefaultMembershipProvider\" type=\"System.Web.Providers.DefaultMembershipProvider, System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"MembershipConnection\" enablePasswordRetrieval=\"false\" enablePasswordReset=\"true\" requiresQuestionAndAnswer=\"false\" requiresUniqueEmail=\"false\" maxInvalidPasswordAttempts=\"5\" minRequiredPasswordLength=\"6\" minRequiredNonalphanumericCharacters=\"0\" passwordAttemptWindow=\"10\" applicationName=\"" + _ParametroTO.NmProjeto + "\" passwordFormat=\"Hashed\" />");
+            sb.AppendLine("<add name=\"DefaultMembershipProvider\" type=\"System.Web.Providers.DefaultMembershipProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"DefaultConnection\" enablePasswordRetrieval=\"false\" enablePasswordReset=\"true\" requiresQuestionAndAnswer=\"false\" requiresUniqueEmail=\"false\" maxInvalidPasswordAttempts=\"5\" minRequiredPasswordLength=\"6\" minRequiredNonalphanumericCharacters=\"0\" passwordAttemptWindow=\"10\" applicationName=\"" + _ParametroTO.NmProjeto + "\" passwordFormat=\"Hashed\" />");
             sb.AppendLine("</providers>");
             sb.AppendLine("</membership>");
-            _SystemWebMembershipElements = sb;
+            _SystemWebMembershipElements = sb;**/
         }
 
-        private void Set_SystemWebRoleElements()
+        private void Set_SystemWebRoleElements(XElement role)
         {
-            StringBuilder sb = new StringBuilder();
+            Get_AddFromProvidersElement(role).SetAttributeValue(XName.Get("applicationName"), _ParametroTO.NmProjeto);
+            /*StringBuilder sb = new StringBuilder();
             sb.AppendLine("<roleManager defaultProvider=\"DefaultRoleProvider\" enabled=\"true\">");
             sb.AppendLine("<providers>");
-            sb.AppendLine("<add name=\"DefaultRoleProvider\" type=\"System.Web.Providers.DefaultRoleProvider, System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"MembershipConnection\" applicationName=\"" + _ParametroTO.NmProjeto + "\" />");
+            sb.AppendLine("<add name=\"DefaultRoleProvider\" type=\"System.Web.Providers.DefaultRoleProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"DefaultConnection\" applicationName=\"" + _ParametroTO.NmProjeto + "\" />");
             sb.AppendLine("</providers>");
             sb.AppendLine("</roleManager>");
-            _SystemWebRoleElements = sb;
+            _SystemWebRoleElements = sb;**/
         }
 
-        private void Set_SystemWebAutenticationElements()
+        private string Get_SystemWebAutenticationElements()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<authentication mode=\"Forms\">");
             sb.AppendLine("<forms loginUrl=\"~/Account/Login\" name=\"OCCookie\" timeout=\"30\" slidingExpiration=\"true\" />");
             sb.AppendLine("</authentication>");
-            _SystemWebAutenticationElements = sb;
+            return sb.ToString();
         }
 
-        private void Set_SystemWebAuthorizationElements()
+        private string Get_SystemWebAuthorizationElements()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<authorization>");
@@ -116,21 +106,22 @@ namespace CRUDLogin.Bussiness.Gerador.Config
             sb.AppendLine("<!--<allow users=\"*\" />-->");
             sb.AppendLine("<!--<allow users=\"?\" />-->");
             sb.AppendLine("</authorization>");
-            _SystemWebAuthorizationElements = sb;
+            return sb.ToString();
         }
 
-        private void Set_SystemWebSessionStateElements()
+       /** Verificar o mode="InProc"
+        * private void Set_SystemWebSessionStateElements(XElement sessionState)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<sessionState mode=\"InProc\" customProvider=\"DefaultSessionProvider\">");
             sb.AppendLine("<providers>");
-            sb.AppendLine("<add name=\"DefaultSessionProvider\" type=\"System.Web.Providers.DefaultSessionStateProvider, System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"MembershipConnection\" />");
+            sb.AppendLine("<add name=\"DefaultSessionProvider\" type=\"System.Web.Providers.DefaultSessionStateProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35\" connectionStringName=\"DefaultConnection\" />");
             sb.AppendLine("</providers>");
             sb.AppendLine("</sessionState>");
             _SystemWebSessionStateElements = sb;
-        }
+        }**/
 
-        private void Set_LocationsForgotElements()
+        private string Get_LocationsForgotElements()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<location path=\"Account/Forgot\" allowOverride=\"true\">");
@@ -140,30 +131,37 @@ namespace CRUDLogin.Bussiness.Gerador.Config
             sb.AppendLine("</authorization>");
             sb.AppendLine("</system.web>");
             sb.AppendLine("</location>");
-            _LocationsForgotElements = sb;
+            return sb.ToString();
         }
 
-        private void Set_LocationHomeElements()
+        private string Get_LocationInstalarSistemaElements()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<location path=\"Home\" allowOverride=\"true\">");
+            sb.AppendLine("<location path=\"Account/InstalarSistema\" allowOverride=\"true\">");
             sb.AppendLine("<system.web>");
             sb.AppendLine("<authorization>");
             sb.AppendLine("<allow users=\"*\" />");
             sb.AppendLine("</authorization>");
             sb.AppendLine("</system.web>");
             sb.AppendLine("</location>");
-            _LocationsHomeElements = sb;
+            return sb.ToString();
         }
 
-        private void Set_ConnectionString()
+        private void Set_ConnectionString(XElement connectionString)
         {
-            StringBuilder sb = new StringBuilder("<add name=\"MembershipConnection\" providerName=\"System.Data.SqlClient\" connectionString=\"Data Source=");
+            XElement add = connectionString.Element(XName.Get("add"));
+            
+            StringBuilder sb = new StringBuilder("\"Data Source=");
             sb.Append(_ParametroTO.Conexao);
             sb.Append(";Initial Catalog=");
             sb.Append(_ParametroTO.Base);
-            sb.Append("Integrated Security=SSPI;MultipleActiveResultSets=true\"/>");
-            _ConnectionStringElement = sb;
+            sb.Append(";Integrated Security=SSPI;user id=");
+            sb.Append(_ParametroTO.Usuario);
+            sb.Append(";password=");
+            sb.Append(_ParametroTO.Senha);
+            sb.Append(";MultipleActiveResultSets=true\"");
+
+            add.SetAttributeValue(XName.Get("connectionString"), sb.ToString());
         }
     }
 }

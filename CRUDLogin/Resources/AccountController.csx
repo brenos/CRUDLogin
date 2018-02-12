@@ -335,7 +335,7 @@ namespace {1}.Controllers
                     // set authentication cookie
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
 
-                    return RedirectToAction("Index", "Menus");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
@@ -375,43 +375,44 @@ namespace {1}.Controllers
             return View();
         }
 
-    //
-    // POST: Account/Forgot?UserId=?
-    //[HttpPost]
-    //[AllowAnonymous]
-    //[Authorize]
-    //public ActionResult Forgot(string UserId, string UserEmail)
-    //{
-    //    Criar estrutura para enviar senha por email.
-    //}
+        //
+        // POST: Account/Forgot?UserId=?
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[Authorize]
+        //public ActionResult Forgot(string UserId, string UserEmail)
+        //{
+        //    Criar estrutura para enviar senha por email.
+        //}
 
-    public ActionResult InstalarSistema()
-    {
-        if (!Roles.RoleExists("Administrador"))
+        public ActionResult InstalarSistema()
         {
-            //Criar a regra admin
-            Roles.CreateRole("Administrador");
-
-            //Adicionar Usuário admim
-            MembershipCreateStatus status;
-            MembershipUser newUser = Membership.CreateUser({2}, {3}, {4}, "Password Question", "Password Answer ", true, out status);
-            if (newUser == null)
+            if (!Roles.RoleExists("Administrador"))
             {
-                //Mensagem de Erro
+                //Criar a regra admin
+                Roles.CreateRole("Administrador");
+
+                //Adicionar Usuário admim
+                MembershipCreateStatus status;
+                MembershipUser newUser = Membership.CreateUser({2}, {3}, {4}, "Password Question", "Password Answer ", true, out status);
+                if (newUser == null)
+                {
+                    //Mensagem de Erro
+                }
+                else
+                {
+                    newUser.Comment = "Administrador";
+                    Membership.UpdateUser(newUser);
+                    Roles.AddUserToRole(newUser.UserName, "Administrador");
+                }
+                //Mensagem de sucesso: "Sistema instalado com sucesso!"
             }
             else
             {
-                newUser.Comment = "Administrador";
-                Membership.UpdateUser(newUser);
-                Roles.AddUserToRole(newUser.UserName, "Administrador");
-            }
-            //Mensagem de sucesso: "Sistema instalado com sucesso!"
-        }
-        else
-        {
-            //Mensagem de erro: "Sistema já instalado!"
+                //Mensagem de erro: "Sistema já instalado!"
 
+            }
+            return RedirectToAction("Login", "Account", new { returnUrl = "Home/Index" });
         }
-        return RedirectToAction("Login", "Account", new { returnUrl = "Home/Index" });
     }
 }

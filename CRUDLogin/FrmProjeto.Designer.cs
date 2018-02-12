@@ -52,6 +52,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtPacote = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtUsuarioAcesso = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtEmailUsuario = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,7 +70,7 @@
             this.btnbtnGerar.Location = new System.Drawing.Point(0, 0);
             this.btnbtnGerar.Name = "btnbtnGerar";
             this.btnbtnGerar.Size = new System.Drawing.Size(200, 40);
-            this.btnbtnGerar.TabIndex = 7;
+            this.btnbtnGerar.TabIndex = 18;
             this.btnbtnGerar.Text = "Gerar Login";
             this.btnbtnGerar.UseVisualStyleBackColor = true;
             this.btnbtnGerar.Click += new System.EventHandler(this.btnbtnGerar_Click);
@@ -96,7 +100,7 @@
             this.btnVoltar.Location = new System.Drawing.Point(0, 0);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(200, 40);
-            this.btnVoltar.TabIndex = 8;
+            this.btnVoltar.TabIndex = 17;
             this.btnVoltar.Text = "Voltar";
             this.btnVoltar.UseVisualStyleBackColor = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
@@ -108,7 +112,7 @@
             this.label3.Location = new System.Drawing.Point(0, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(464, 41);
-            this.label3.TabIndex = 1;
+            this.label3.TabIndex = 99;
             this.label3.Text = "Selecione o projeto e o tipo de autenticação que o mesmo irá obter. A senha para " +
     "o usuário Administrador deverá ser digitada.";
             // 
@@ -119,7 +123,7 @@
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(464, 21);
-            this.label2.TabIndex = 0;
+            this.label2.TabIndex = 98;
             this.label2.Text = "Projeto";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -140,7 +144,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(464, 75);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 97;
             this.label1.Text = "CRUD Login";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -167,25 +171,25 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(29, 296);
+            this.label4.Location = new System.Drawing.Point(29, 265);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 15);
-            this.label4.TabIndex = 17;
+            this.label4.TabIndex = 103;
             this.label4.Text = "Pasta do Projeto";
             // 
             // txtCaminho
             // 
-            this.txtCaminho.Location = new System.Drawing.Point(32, 314);
+            this.txtCaminho.Location = new System.Drawing.Point(32, 283);
             this.txtCaminho.Name = "txtCaminho";
             this.txtCaminho.Size = new System.Drawing.Size(294, 20);
-            this.txtCaminho.TabIndex = 2;
+            this.txtCaminho.TabIndex = 11;
             // 
             // btnSelecionarPasta
             // 
-            this.btnSelecionarPasta.Location = new System.Drawing.Point(332, 312);
+            this.btnSelecionarPasta.Location = new System.Drawing.Point(332, 281);
             this.btnSelecionarPasta.Name = "btnSelecionarPasta";
             this.btnSelecionarPasta.Size = new System.Drawing.Size(75, 23);
-            this.btnSelecionarPasta.TabIndex = 3;
+            this.btnSelecionarPasta.TabIndex = 12;
             this.btnSelecionarPasta.Text = "Selecionar";
             this.btnSelecionarPasta.UseVisualStyleBackColor = true;
             this.btnSelecionarPasta.Click += new System.EventHandler(this.btnSelecionarPasta_Click);
@@ -194,100 +198,142 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(29, 354);
+            this.label5.Location = new System.Drawing.Point(29, 323);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 15);
-            this.label5.TabIndex = 20;
+            this.label5.TabIndex = 105;
             this.label5.Text = "Tipo de Autenticação";
             // 
             // cmbTipoAutenticacao
             // 
             this.cmbTipoAutenticacao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoAutenticacao.FormattingEnabled = true;
-            this.cmbTipoAutenticacao.Location = new System.Drawing.Point(32, 372);
+            this.cmbTipoAutenticacao.Items.AddRange(new object[] {
+            "Provider"});
+            this.cmbTipoAutenticacao.Location = new System.Drawing.Point(32, 341);
             this.cmbTipoAutenticacao.Name = "cmbTipoAutenticacao";
             this.cmbTipoAutenticacao.Size = new System.Drawing.Size(375, 21);
-            this.cmbTipoAutenticacao.TabIndex = 4;
+            this.cmbTipoAutenticacao.TabIndex = 13;
             // 
             // chbBootstrap
             // 
             this.chbBootstrap.AutoSize = true;
+            this.chbBootstrap.Enabled = false;
             this.chbBootstrap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbBootstrap.Location = new System.Drawing.Point(32, 481);
+            this.chbBootstrap.Location = new System.Drawing.Point(32, 549);
             this.chbBootstrap.Name = "chbBootstrap";
             this.chbBootstrap.Size = new System.Drawing.Size(132, 19);
-            this.chbBootstrap.TabIndex = 6;
+            this.chbBootstrap.TabIndex = 20;
             this.chbBootstrap.Text = "Adicionar Bootstrap";
             this.chbBootstrap.UseVisualStyleBackColor = true;
+            this.chbBootstrap.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(29, 416);
+            this.label6.Location = new System.Drawing.Point(29, 492);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(130, 15);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Senha (Administrador)";
+            this.label6.Size = new System.Drawing.Size(102, 15);
+            this.label6.TabIndex = 108;
+            this.label6.Text = "Senha de Acesso";
             // 
             // txtSenhaAdm
             // 
-            this.txtSenhaAdm.Location = new System.Drawing.Point(32, 434);
+            this.txtSenhaAdm.Location = new System.Drawing.Point(32, 510);
             this.txtSenhaAdm.Name = "txtSenhaAdm";
             this.txtSenhaAdm.PasswordChar = '*';
             this.txtSenhaAdm.Size = new System.Drawing.Size(375, 20);
-            this.txtSenhaAdm.TabIndex = 5;
+            this.txtSenhaAdm.TabIndex = 16;
             this.txtSenhaAdm.UseSystemPasswordChar = true;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(29, 182);
+            this.label7.Location = new System.Drawing.Point(29, 151);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 15);
-            this.label7.TabIndex = 24;
+            this.label7.TabIndex = 100;
             this.label7.Text = "Nome do Projeto";
             // 
             // txtNomeProjeto
             // 
-            this.txtNomeProjeto.Location = new System.Drawing.Point(32, 200);
+            this.txtNomeProjeto.Location = new System.Drawing.Point(32, 169);
             this.txtNomeProjeto.Name = "txtNomeProjeto";
             this.txtNomeProjeto.Size = new System.Drawing.Size(375, 20);
-            this.txtNomeProjeto.TabIndex = 0;
+            this.txtNomeProjeto.TabIndex = 9;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(29, 239);
+            this.label8.Location = new System.Drawing.Point(29, 208);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(104, 15);
-            this.label8.TabIndex = 25;
+            this.label8.TabIndex = 101;
             this.label8.Text = "Pacote do Porjeto";
             // 
             // txtPacote
             // 
-            this.txtPacote.Location = new System.Drawing.Point(32, 257);
+            this.txtPacote.Location = new System.Drawing.Point(32, 226);
             this.txtPacote.Name = "txtPacote";
             this.txtPacote.Size = new System.Drawing.Size(375, 20);
-            this.txtPacote.TabIndex = 1;
+            this.txtPacote.TabIndex = 10;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(122, 298);
+            this.label9.Location = new System.Drawing.Point(122, 267);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(227, 12);
-            this.label9.TabIndex = 26;
+            this.label9.TabIndex = 104;
             this.label9.Text = "(Onde contem as pastas Views, Controllers e Models)";
+            // 
+            // txtUsuarioAcesso
+            // 
+            this.txtUsuarioAcesso.Location = new System.Drawing.Point(32, 400);
+            this.txtUsuarioAcesso.Name = "txtUsuarioAcesso";
+            this.txtUsuarioAcesso.Size = new System.Drawing.Size(375, 20);
+            this.txtUsuarioAcesso.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(29, 382);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(109, 15);
+            this.label10.TabIndex = 106;
+            this.label10.Text = "Usuario de Acesso";
+            // 
+            // txtEmailUsuario
+            // 
+            this.txtEmailUsuario.Location = new System.Drawing.Point(32, 457);
+            this.txtEmailUsuario.Name = "txtEmailUsuario";
+            this.txtEmailUsuario.Size = new System.Drawing.Size(375, 20);
+            this.txtEmailUsuario.TabIndex = 15;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(29, 439);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(102, 15);
+            this.label11.TabIndex = 107;
+            this.label11.Text = "Email do Usuário";
             // 
             // FrmProjeto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 631);
+            this.Controls.Add(this.txtEmailUsuario);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.txtUsuarioAcesso);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtPacote);
             this.Controls.Add(this.label8);
@@ -346,5 +392,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtPacote;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtUsuarioAcesso;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtEmailUsuario;
+        private System.Windows.Forms.Label label11;
     }
 }

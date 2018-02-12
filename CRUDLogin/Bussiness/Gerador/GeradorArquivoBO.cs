@@ -23,30 +23,40 @@ namespace CRUDLogin.Bussiness.Gerador
         public RetornoTO GerarCRUDLogin(ParametroTO parametroTO)
         {
             RetornoTO retorno = new RetornoTO();
-            
-            if (Directory.GetDirectories(parametroTO.Pasta).Where(s => s == parametroTO.Pasta + "\\Views").Count() > 0)
-            {
-                //Escrever no Web.Config
-                //Criar as pastas necessárias das views
-                Directory.CreateDirectory(parametroTO.Pasta + "\\Views\\Role");
-                Directory.CreateDirectory(parametroTO.Pasta + "\\Views\\Account");
-                //Gerar as Views
-                GerarViews(parametroTO, false);
-                //Criar a pasta necessárias do controller
-                Directory.CreateDirectory(parametroTO.Pasta + "\\Controllers");
-                //Gerar os Controllers
-                GerarControllers(parametroTO);
-                //Criar a pasta necessárias do controller
-                Directory.CreateDirectory(parametroTO.Pasta + "\\Models");
-                //Gerar os Models
-                GerarModels(parametroTO);
-                //Alterar o web.config
-                AlterarWebConfig(parametroTO);
 
-                retorno.IsOK = true;
-                retorno.Mensagem = "CRUD gerado com sucesso!";
+            try
+            {
+
+                if (Directory.GetDirectories(parametroTO.Pasta).Where(s => s == parametroTO.Pasta + "\\Views").Count() > 0)
+                {
+                    //Escrever no Web.Config
+                    //Criar as pastas necessárias das views
+                    Directory.CreateDirectory(parametroTO.Pasta + "\\Views\\Role");
+                    Directory.CreateDirectory(parametroTO.Pasta + "\\Views\\Account");
+                    //Gerar as Views
+                    GerarViews(parametroTO, false);
+                    //Criar a pasta necessárias do controller
+                    Directory.CreateDirectory(parametroTO.Pasta + "\\Controllers");
+                    //Gerar os Controllers
+                    GerarControllers(parametroTO);
+                    //Criar a pasta necessárias do controller
+                    Directory.CreateDirectory(parametroTO.Pasta + "\\Models");
+                    //Gerar os Models
+                    GerarModels(parametroTO);
+                    //Alterar o web.config
+                    AlterarWebConfig(parametroTO);
+
+                    retorno.IsOK = true;
+                    retorno.Mensagem = "CRUD gerado com sucesso!";
+                }
+                else
+                {
+                    retorno.IsOK = false;
+                    retorno.Mensagem = "Favor selecionar a pasta correta do projeto.";
+                }
+
             }
-            else
+            catch (Exception e)
             {
                 retorno.IsOK = false;
                 retorno.Mensagem = "Favor selecionar a pasta correta do projeto.";

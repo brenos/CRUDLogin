@@ -19,20 +19,23 @@ namespace CRUDLogin
         public FrmConexao()
         {
             InitializeComponent();
-            //Inicialização de componentes
             cmbBanco.SelectedIndex = 0;
 
-            cmbBase.SelectedIndex = 0;
-            txtConexao.Text = @"DESKTOP-626SLSH\SQLEXPRESS";
-            txtUsuario.Text = "sa";
-            txtSenha.Text = "12345678";
+            #if DEBUG
+                txtConexao.Text = @"DESKTOP-626SLSH\SQLEXPRESS";
+                txtUsuario.Text = "sa";
+                txtSenha.Text = "12345678";
+            #endif
         }
 
         private void chbBaseManual_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cbIsManual = sender as CheckBox;
             if (cbIsManual.Checked)
+            {
+                cmbBase.Items.Clear();
                 cmbBase.DropDownStyle = ComboBoxStyle.DropDown;
+            }
             else
                 cmbBase.DropDownStyle = ComboBoxStyle.DropDownList;
         }
@@ -61,7 +64,7 @@ namespace CRUDLogin
             {
                 ParametroTO parametroTO = new ParametroTO
                 {
-                    Base = cmbBase.SelectedText,
+                    Base = cmbBase.Text,
                     Conexao = txtConexao.Text,
                     Senha = txtSenha.Text,
                     Usuario = txtUsuario.Text
