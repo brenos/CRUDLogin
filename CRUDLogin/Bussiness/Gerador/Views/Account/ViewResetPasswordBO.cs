@@ -27,6 +27,7 @@ namespace CRUDLogin.Bussiness.Gerador.Views.Account
             {
                 pagina = sr.ReadToEnd();
             }
+            pagina = pagina.Replace("{0}", _ParametroTO.Pacote);
             using (StreamWriter sw = new StreamWriter(_ParametroTO.Pasta + "\\Views\\Account\\ResetPassword.cshtml"))
             {
                 sw.WriteLine(pagina);

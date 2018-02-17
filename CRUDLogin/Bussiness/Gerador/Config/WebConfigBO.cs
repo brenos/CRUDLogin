@@ -28,18 +28,36 @@ namespace CRUDLogin.Bussiness.Gerador.Config
             XElement systemWeb = webConfig.Element(XName.Get("system.web"));
             XElement profile = systemWeb.Element(XName.Get("profile"));
             XElement membership = systemWeb.Element(XName.Get("membership"));
-            XElement role = systemWeb.Element(XName.Get("profile"));
+            XElement role = systemWeb.Element(XName.Get("roleManager"));
+            XElement authentication = systemWeb.Element(XName.Get("authentication"));
+            XElement authorization = systemWeb.Element(XName.Get("authorization"));
+
+            List<XElement> locations = webConfig.Elements(XName.Get("location")).ToList();
 
             XElement connectionString = webConfig.Element(XName.Get("connectionStrings"));
 
             Set_SystemWebProfileElements(profile);
             Set_SystemWebMembershipElements(membership);
             Set_SystemWebRoleElements(role);
-            systemWeb.Add(XElement.Parse(Get_SystemWebAutenticationElements()));
-            systemWeb.Add(XElement.Parse(Get_SystemWebAuthorizationElements()));
-            //Verifica o SessionState
+            
+            if (authentication == null)
+                systemWeb.Add(XElement.Parse(Get_SystemWebAutenticationElements()));
+            if (authorization == null)
+                systemWeb.Add(XElement.Parse(Get_SystemWebAuthorizationElements()));
+
+            if (locations.Count > 0)
+            {
+                foreach (var location in locations)
+                {
+                    if (location.Attribute(XName.Get("path")).Value.Equals("Account/Forgot"))
+                        location.Remove();
+                    if (location.Attribute(XName.Get("path")).Value.Equals("Account/InstalarSistema"))
+                        location.Remove();
+                }
+            }
             systemWeb.AddAfterSelf(XElement.Parse(Get_LocationsForgotElements()));
             systemWeb.AddAfterSelf(XElement.Parse(Get_LocationInstalarSistemaElements()));
+
             Set_ConnectionString(connectionString);
             
             webConfig.Save(_ParametroTO.Pasta + "\\Web.config");
@@ -79,6 +97,7 @@ namespace CRUDLogin.Bussiness.Gerador.Config
 
         private void Set_SystemWebRoleElements(XElement role)
         {
+            role.SetAttributeValue(XName.Get("enabled"), true);
             Get_AddFromProvidersElement(role).SetAttributeValue(XName.Get("applicationName"), _ParametroTO.NmProjeto);
             /*StringBuilder sb = new StringBuilder();
             sb.AppendLine("<roleManager defaultProvider=\"DefaultRoleProvider\" enabled=\"true\">");
@@ -151,15 +170,15 @@ namespace CRUDLogin.Bussiness.Gerador.Config
         {
             XElement add = connectionString.Element(XName.Get("add"));
             
-            StringBuilder sb = new StringBuilder("\"Data Source=");
+            StringBuilder sb = new StringBuilder("Data Source=");
             sb.Append(_ParametroTO.Conexao);
             sb.Append(";Initial Catalog=");
             sb.Append(_ParametroTO.Base);
-            sb.Append(";Integrated Security=SSPI;user id=");
+            sb.Append(";Integrated Security=false;user id=");
             sb.Append(_ParametroTO.Usuario);
             sb.Append(";password=");
             sb.Append(_ParametroTO.Senha);
-            sb.Append(";MultipleActiveResultSets=true\"");
+            sb.Append(";MultipleActiveResultSets=true");
 
             add.SetAttributeValue(XName.Get("connectionString"), sb.ToString());
         }

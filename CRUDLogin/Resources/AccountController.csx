@@ -91,7 +91,7 @@ namespace {1}.Controllers
             if (ModelState.IsValid)
             {
                 MembershipCreateStatus status;
-                MembershipUser newUser =  Membership.CreateUser(usuario.UserName, usuario.Password, usuario.Email, "Password Question", "Password Answer ", true, out status);
+                MembershipUser newUser =  Membership.CreateUser({2}, {3}, {4}, "Password Question", "Password Answer ", true, out status);
                 if (newUser == null)
                 {
                     //Mensagem de erro

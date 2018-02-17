@@ -30,7 +30,7 @@ namespace CRUDLogin
             #if DEBUG
                 txtNomeProjeto.Text = "Teste";
                 txtPacote.Text = "Teste";
-                txtCaminho.Text = @"C:\Users\INFLUIR - BRENO\source\repos\TesteCrudLogin\TesteCrudLogin";
+                txtCaminho.Text = @"C:\Users\INFLUIR - BRENO\source\repos\TesteCRUDLogin3\TesteCRUDLogin3";
                 txtUsuarioAcesso.Text = "administrador";
                 txtEmailUsuario.Text = "admin@crud.com";
                 txtSenhaAdm.Text = "123456";

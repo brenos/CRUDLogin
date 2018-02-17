@@ -27,6 +27,7 @@ namespace CRUDLogin.Bussiness.Gerador.Views.Role
             {
                 pagina = sr.ReadToEnd();
             }
+            pagina = pagina.Replace("{0}", _ParametroTO.Pacote);
             using (StreamWriter sw = new StreamWriter(_ParametroTO.Pasta + "\\Views\\Role\\Details.cshtml"))
             {
                 sw.WriteLine(pagina);

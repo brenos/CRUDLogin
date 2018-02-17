@@ -29,9 +29,9 @@ namespace CRUDLogin.Bussiness.Gerador.Controllers
             }
             pagina = pagina.Replace("{0}", _ParametroTO.Pacote);
             pagina = pagina.Replace("{1}", _ParametroTO.Pacote);
-            pagina = pagina.Replace("{2}", _ParametroTO.UsuarioAdmin);
-            pagina = pagina.Replace("{3}", _ParametroTO.SenhaAdmin);
-            pagina = pagina.Replace("{4}", _ParametroTO.EmailAdmin);
+            pagina = pagina.Replace("{2}", "\"" + _ParametroTO.UsuarioAdmin + "\"");
+            pagina = pagina.Replace("{3}", "\"" + _ParametroTO.SenhaAdmin + "\"");
+            pagina = pagina.Replace("{4}", "\"" + _ParametroTO.EmailAdmin + "\"");
             using (StreamWriter sw = new StreamWriter(_ParametroTO.Pasta + "\\Controllers\\AccountController.cs"))
             {
                 sw.WriteLine(pagina);
